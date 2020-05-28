@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Policy type="iprule">
+	<!--IP规则-->
+	<IpRule>
+		<!--每条规则一个Rule节点，enable表示是否启用-->
+		<Rule enable="0" log="1">
+			<!--动作，1=阻止，2=直接放行-->
+			<Action>1</Action>
+			<!--方向，1=入站，2=出站-->
+			<Direction>1</Direction>
+			<!--源IP，仅支持单条-->
+			<SourceIP>
+				<Value>192.168.10.0/24</Value>
+			</SourceIP>
+			<!--目的IP，规则同源IP-->
+			<DestIP>
+				<Value></Value>
+			</DestIP>
+			<!--协议-->
+			<Protocol>
+				<!--协议号，6=tcp，17=udp-->
+				<Number>17</Number>
+				<!--源端口，仅对TCP/UDP协议有效，最多支持5组-->
+				<SourcePort>
+					<Port>
+						<Begin>80</Begin>
+						<End>80</End>
+					</Port>
+					<Port>
+						<Begin>0</Begin>
+						<End>65535</End>
+					</Port>
+				</SourcePort>
+				<!--目的端口，规则源端口-->
+				<DestPort>
+					<Port>
+						<Begin>0</Begin>
+						<End>65535</End>
+					</Port>
+				</DestPort>
+			</Protocol>
+		</Rule>
+	</IpRule>
+</Policy>
