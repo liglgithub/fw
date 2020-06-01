@@ -383,7 +383,7 @@ SQL_CODE fw_rule_delete_by_num_from_db(sqlite3 *db, int direction, int priority,
 	if(priority<0 || (priority  > last_priority ))
 		return SQL_NOT_FOUND;
 	snprintf(buf, sizeof(buf),FW_RULE_DELETE_BY_PRIORITY_SQL ";" FW_RULE_UPDATE_PRIORITY_SUB_SQL,
-					isipv6,direction,priority,priority,direction,isipv6);
+					direction,priority,isipv6,priority,direction,isipv6);
 	//FWLOG_INFO("buf:%s",buf);
         do
         {

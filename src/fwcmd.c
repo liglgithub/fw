@@ -35,7 +35,7 @@
 #define CHAINNAME(chain)	(chain?(chain):"")
 #define ISLOG(log)		((log)?1:0)
 #define ISIPV6TYPE(iptype)	(6==iptype)
-#define IPTYPE(iptype)		(!iptype?"0": "1")
+#define IPTYPE(iptype)		(6==iptype?"1": "0")
 const char *fw4cmd;
 const char *fw6cmd;
 
@@ -485,7 +485,11 @@ int do_command(int argc, char *argv[])
 		exit_error(PARAMETER_PROBLEM, "protocol shoud assign\n");
 	if (4==iptype && (options & OPT_IPV6 ))
 		exit_error(PARAMETER_PROBLEM, "iptype do not match\n");
-	if(!iptype && (options & OPT_IPV6 )) iptype = 6;
+	if(!iptype )
+	{
+		if( (options & OPT_IPV6 )) iptype = 6;
+		else iptype = 4;
+	}
 	if ( options & OPT_JUMP && options & OPT_LOG)
 	{
 		if(isinput) {if(isdrop) set_optvals(IN_LOG_DROP_TARGET, OPT_JUMP);
